@@ -6,12 +6,13 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
     context: path.resolve(__dirname, '../'),
     entry: {
-        app: './src/main.js'
+        app: './src/components/a/index.js'
     },
     output: {
-        path: path.join( __dirname, "/dist"), //打包后的文件存放的地方
-        filename: "bundle.js" //打包后输出文件的文件名
+        path: path.join( __dirname, "../dist"), //打包后的文件存放的地方
+        filename: "[hash].js" //打包后输出文件的文件名
     },
+    target: "web",
     module: {
         rules: [
             {

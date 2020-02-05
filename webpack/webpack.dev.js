@@ -1,5 +1,10 @@
 const merge = require('webpack-merge');  // 引入webpack-merge功能模块
 const common = require('./webpack.common.js'); // 引入webpack.common.js
+const path = require('path')
+
+function resolve (dir) {
+    return path.join(__dirname, '..', dir)
+}
 
 module.exports = merge(common, {   // 将webpack.common.js合并到当前文件
     devServer: {
@@ -11,7 +16,9 @@ module.exports = merge(common, {   // 将webpack.common.js合并到当前文件
     },
     resolve: {
         alias: {
-          'vue$': 'vue/dist/vue.esm.js' 
-        }
+          'vue$': 'vue/dist/vue.esm.js',
+          '@': resolve('src'), 
+        },
+        extensions: ['.js','.vue']
     }
 })
