@@ -1,22 +1,31 @@
 {
   "name": "vue-lego",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "A Vue-cli project",
   "scripts": {
     "test": "test",
-    "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "build": "webpack --config webpack/webpack.prod.js",
+    "start": "webpack-dev-server --open --config webpack/webpack.dev.js"
   },
-  "author": "",
+  "author": "mzq",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^1.1.2",
+    "vue-loader": "^15.8.3",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "vue": "^2.6.11"
   }
 }
