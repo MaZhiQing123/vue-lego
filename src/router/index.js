@@ -1,16 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const RaiseResult =  resolve => require(['@/components/a'], resolve) 
-// const prinlt = resolve => require(['@/components/commonPage/prinlt'],resolve)
+
 Vue.use(Router)
 // import {bus} from '../common/EventBus'
 const router = new Router({
   mode:'history',
   routes: [
       {
-        path:'/',
-        name:'RaiseResult',
-        component:RaiseResult,
+        path:'/a',
+        name:'a',
+        component:resolve => require(['@/components/a'], resolve),
+        meta:{
+          name:"募集说明书结果查询"
+        },
+      },{
+        path:'/b',
+        name:'b',
+        component:resolve => require(['@/components/b'], resolve),
         meta:{
           name:"募集说明书结果查询"
         },
