@@ -16,8 +16,5 @@ export default {
 <style lang="scss" scoped>
 .anc{
     transform: rotate(1deg);
-    .aer{
-        transform: translate(10px)
-    }
 }
 </style>

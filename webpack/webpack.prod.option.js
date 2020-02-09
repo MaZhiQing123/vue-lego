@@ -10,12 +10,14 @@ const promptList = [{
 const build = name => {
     webpack(production(name), (err, stats) => {
         if (err || stats.hasErrors()) {
-            throw err || stats.hasErrors()
-        }
-        process.stdout.write(stats.toString({
-            colors: true,
-            modules: false
-        }))
+            console.error('发生错误')
+            process.stdout.write( err || stats.hasErrors() )
+        } 
+            process.stdout.write(stats.toString({
+                colors: true,
+                modules: false
+            }))            
+        
     })
 }
 (async function() {
