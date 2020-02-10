@@ -7,7 +7,7 @@
 <script>
 // import b from '../b'
 export default {
-    name:'a',
+    name:'a2',
     components:{
         // 'qwepoi':b
     }

@@ -1,29 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import main from '@/components/main.vue'
+import a from '@/components/a'
+import b from '@/components/b'
 Vue.use(Router)
-// import {bus} from '../common/EventBus'
-const router = new Router({
-  mode:'history',
-  routes: [
-      {
-        path:'/a',
-        name:'a',
-        component:resolve => require(['@/components/a'], resolve),
-        meta:{
-          name:"募集说明书结果查询"
-        },
-      },{
-        path:'/b',
-        name:'b',
-        component:resolve => require(['@/components/b'], resolve),
-        meta:{
-          name:"募集说明书结果查询"
-        },
-      }
-      
-  ]
+
+export default new Router({
+  mode:'hash',
+  routes: [{
+    path:'/',
+    name:'main',
+    component: main,
+    children:[...a,...b]
+  }]
 })
-
-export default  router
-

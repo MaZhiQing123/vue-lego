@@ -5,7 +5,8 @@
   "scripts": {
     "test": "test",
     "build": "node webpack/webpack.prod.option.js",
-    "start": "webpack-dev-server --open --config webpack/webpack.dev.js"
+    "start": "webpack-dev-server --open --config webpack/webpack.dev.js",
+    "build --report": "webpack-bundle-analyzer --port 8123 dist/stats.json"
   },
   "author": "mzq",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "autoprefixer": "^9.7.4",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",

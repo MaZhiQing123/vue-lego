@@ -7,20 +7,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 function resolve (dir) {
     return path.join(__dirname, '..', dir)
 }
-
 module.exports = {
     context: path.resolve(__dirname, '../'),
-    entry: {
-        // root: './src/components/a/index.js'
-        root: './src/main.js'
-    },
     resolve: {
         alias: {
             '@': resolve('src'), 
         }
     },
     output: {
-        path: path.join( __dirname, "../dist"), //打包后的文件存放的地方
+        path: path.resolve( __dirname, "../dist"),
+        publicPath: '/',
+        filename: 'bundle.js'
     },
     target: "web",
     module: {
@@ -40,6 +37,9 @@ module.exports = {
             {                             // jsx配置
                 test: /(\.jsx|\.js)$/,                  // 注意use选择如果有多项配置，可写成这种对象形式
                 loader: "babel-loader",
+                options: {
+                    plugins: ['syntax-dynamic-import']
+                },
                 exclude: /node_modules/   // 排除匹配node_modules模块
             }
         ]
