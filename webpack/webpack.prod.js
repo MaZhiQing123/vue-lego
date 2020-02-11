@@ -1,11 +1,16 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const ConsoleLogOnBuildWebpackPlugin = require('./hello.js')
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 引入CleanWebpackPlugin插件
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 let webpackConfigList = []
 const webpackDefalutConfig = {
     entry: '',
-    // plugins: [new CleanWebpackPlugin()],
+    plugins: [
+        new CleanWebpackPlugin(),
+        new ConsoleLogOnBuildWebpackPlugin()
+    ],
     output: {
         filename: 'js/[name]/[name].[hash:8].js'
     },
@@ -17,7 +22,7 @@ module.exports = name => {
 
         if(name[i] == 'ALL'){
             obj.entry = `@/main.js`
-            obj.output.filename = `js/[name].[hash:8].js`
+            obj.output.filename = `js/[name].js`
         } else {
             obj.name = name[i]
             obj.entry = `@/components/${name[i]}/index.js`

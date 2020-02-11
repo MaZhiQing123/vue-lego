@@ -5,8 +5,7 @@
   "scripts": {
     "test": "test",
     "build": "node webpack/webpack.prod.option.js",
-    "start": "webpack-dev-server --open --config webpack/webpack.dev.js",
-    "build --report": "webpack-bundle-analyzer --port 8123 dist/stats.json"
+    "start": "webpack-dev-server --open --config webpack/webpack.dev.js"
   },
   "author": "mzq",
   "license": "ISC",
