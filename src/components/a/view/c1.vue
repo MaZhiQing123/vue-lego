@@ -13,8 +13,3 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-.anc{
-    transform: rotate(100deg);
-}
-</style>

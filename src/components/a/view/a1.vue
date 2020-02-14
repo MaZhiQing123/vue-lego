@@ -5,7 +5,6 @@
     </div>
 </template>
 <script>
-// import b from '../b'
 export default {
     name:'a1',
     components:{
@@ -13,8 +12,3 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-.anc{
-    transform: rotate(1deg);
-}
-</style>

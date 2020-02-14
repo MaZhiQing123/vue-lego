@@ -9,17 +9,19 @@ function resolve (dir) {
 }
 module.exports = {
     context: path.resolve(__dirname, '../'),
-    resolve: {
-        alias: {
-            '@': resolve('src'), 
-        }
-    },
     output: {
         path: path.resolve( __dirname, "../dist"),
         publicPath: '/',
         filename: 'bundle.js'
     },
-    target: "web",
+    target: 'node',
+    resolve: {
+        alias: {
+            '@': resolve('src'),
+            'vue$': 'vue/dist/vue.min.js',
+        },
+        extensions: ['.js','.vue']
+    },
     module: {
         rules: [
             {
@@ -34,13 +36,10 @@ module.exports = {
                 test: /\.vue$/, 
                 loader: 'vue-loader',
             },
-            {                             // jsx配置
-                test: /(\.jsx|\.js)$/,                  // 注意use选择如果有多项配置，可写成这种对象形式
+            {            
+                test: /\.js$/,               
                 loader: "babel-loader",
-                options: {
-                    plugins: ['syntax-dynamic-import']
-                },
-                exclude: /node_modules/   // 排除匹配node_modules模块
+                exclude: /node_modules/
             }
         ]
     },
@@ -49,7 +48,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "../index.html")// new一个这个插件的实例，并传入相关的参数
         }),
-        new webpack.HotModuleReplacementPlugin(),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({filename: 'css/[name].[hash:5].css'})
     ]
