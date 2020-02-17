@@ -11,10 +11,19 @@ module.exports = merge(common, {   // 将webpack.common.js合并到当前文件
         hot: true,     //热加载
         // lazy: true,
     },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.runtime.esm.js',
+        },
+    },
+    devtool: 'source-map',
     entry: {
         root: './src/main.js'
     },
     plugins:[
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, "../index.html")// new一个这个插件的实例，并传入相关的参数
+        }),
         new webpack.HotModuleReplacementPlugin(),
     ],
 })

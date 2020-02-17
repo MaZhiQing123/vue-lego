@@ -1,20 +1,18 @@
 <template>
     <div class="anc">
-        112312312
+        112312312asdasdasdsas
         <!-- <qwepoi></qwepoi> -->
     </div>
 </template>
 <script>
-// import b from '../b'
 export default {
-    name:'a2',
+    name:'a1',
     components:{
-        // 'qwepoi':b
+    },
+    data(){
+        return{
+            name:'a1'
+        }
     }
 }
 </script>
-<style lang="scss" scoped>
-.anc{
-    transform: rotate(1deg);
-}
-</style>

@@ -14,11 +14,11 @@ module.exports = {
         publicPath: '/',
         filename: 'bundle.js'
     },
-    target: 'node',
+    target: 'web',
     resolve: {
         alias: {
             '@': resolve('src'),
-            'vue$': 'vue/dist/vue.min.js',
+            'vue$': 'vue/dist/vue.esm.js',
         },
         extensions: ['.js','.vue']
     },
@@ -35,20 +35,21 @@ module.exports = {
             {
                 test: /\.vue$/, 
                 loader: 'vue-loader',
+                options: {
+                    hotReload: false // 关闭热重载
+                  }
             },
             {            
                 test: /\.js$/,               
                 loader: "babel-loader",
+                include: [resolve('src'), resolve('test')],
                 exclude: /node_modules/
             }
         ]
     },
     plugins: [
         new webpack.BannerPlugin('vue-lego'),  // new一个插件的实例 
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, "../index.html")// new一个这个插件的实例，并传入相关的参数
-        }),
         new VueLoaderPlugin(),
-        new MiniCssExtractPlugin({filename: 'css/[name].[hash:5].css'})
+        new MiniCssExtractPlugin({filename: 'static/css/[name].[chunkhash:8].css'})
     ]
 }
