@@ -6,19 +6,13 @@ class ConsoleLogOnBuildWebpackPlugin {
     apply(compiler) {
         compiler.hooks.compilation.tap(pluginName, compilation => {
             let obj = {}
-            compilation.hooks.additionalAssets.tapAsync('addAssets',() => {
+            compilation.hooks.optimizeChunksBasic.tap('addAssets',(v) => {
                 // if(v[0].name == 'a1'){
-                    compilation.chunks.forEach(element => {
-                        editRelation.forEach(child => {
-                            if(element.name == child.name){
-                                child.component = element.files
-                            }
-                        })
-                    });
-                    compilation.assets['static/js/relation.js'] = `
-                        export default
-                        \/n${editRelation}
-                    `
+                    // let keys = Object.keys(compilation.assets)
+                    console.log(compilation.chunks)
+                    // for(let i in v){
+                    //     console.log(v[i].entryModule)
+                    // }
                     // console.log(compilation.chunks)
                     // for(let i in compilation.chunks){
                     //     console.log(compilation.chunks[i]._modules)

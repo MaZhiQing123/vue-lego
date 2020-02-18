@@ -48,18 +48,17 @@ const build = name => {
     })
 
 }
-build('a')
-// (async function(){
-//     let checkMode = await inquirer.prompt(modeList);
-//     console.log(`TYPE: ${checkMode.value}`)
-//     if(checkMode.value !== 'root') {
-//         let modules = await inquirer.prompt(modulesList);
-//         console.log(`Building ${modules.value} ...`);
-//         await build(modules.value)
-//     } else {
-//         console.log(`ALL Building...`);
-//         await build(checkMode.value)
-//     }
-//     console.log('\n---------------------------success------------------------')
-// })()
+(async function(){
+    let checkMode = await inquirer.prompt(modeList);
+    console.log(`TYPE: ${checkMode.value}`)
+    if(checkMode.value !== 'root') {
+        let modules = await inquirer.prompt(modulesList);
+        console.log(`Building ${modules.value} ...`);
+        await build(modules.value)
+    } else {
+        console.log(`ALL Building...`);
+        await build(checkMode.value)
+    }
+    console.log('\n---------------------------success------------------------')
+})()
 

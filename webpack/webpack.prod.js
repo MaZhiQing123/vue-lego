@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const ConsoleLogOnBuildWebpackPlugin = require('./hello.js')
@@ -9,9 +9,8 @@ let webpackConfigList = []
 const webpackDefalutConfig = {
     mode:'production',
     plugins: [
-        new CleanWebpackPlugin(),
         // new WebpackMd5Hash(),
-        new ConsoleLogOnBuildWebpackPlugin(),
+        // new ConsoleLogOnBuildWebpackPlugin(),
     ],
     optimization: {
         splitChunks: {
@@ -29,30 +28,37 @@ const webpackDefalutConfig = {
     output:{}
 }
 module.exports = name => {
-    let config = merge(common, webpackDefalutConfig)
 
     if(name && typeof name == 'string'){
         name = [name]
     }
     if(name[0] !== 'root'){
         name.forEach(element => {
+            let config = merge(common, webpackDefalutConfig)
+            config.name = element
             config.entry = {
                 index:`./src/components/child/${element}`
             }
-            config.output.filename = `static/js/${element}/[name].[chunkhash:8].js`
+            config.output = {
+                filename:`static/js/${element}/[name].js`,
+                chunkFilename:`static/js/${element}/[name].[chunkhash:8].js`,
+            }
             webpackConfigList.push(config)
         });        
     } else {
         config.entry = {
             index:`./src/components/root/main.js`
         }
-        config.plugins = [new HtmlWebpackPlugin({
-            template: path.join(__dirname, "../index.html")
-        })],
+        config.plugins = [
+            new HtmlWebpackPlugin({
+                template: path.join(__dirname, "../index.html")
+            }),
+            new CleanWebpackPlugin(),
+        ],
         config.output.filename = `static/js/[name].[chunkhash:8].js`
         webpackConfigList.push(config)
     }
  
-
+    console.log(webpackConfigList)
     return webpackConfigList
 }

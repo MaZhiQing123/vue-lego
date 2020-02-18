@@ -13,7 +13,7 @@ export default [
         name:'c1',
         component:() => import(/* webpackChunkName: "c1" */ './view/c1.vue'),
         meta:{
-            name:"募集说明书结果查询"
+            name:"募集说明书结果查询a "
         },
     }
-]
+]    
