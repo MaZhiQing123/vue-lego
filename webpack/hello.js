@@ -1,6 +1,5 @@
 // const ConcatSource = require('webpack-sources').ConcatSource;
 
-const editRelation = require('../src/relation.json')
 const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 class ConsoleLogOnBuildWebpackPlugin {
     apply(compiler) {

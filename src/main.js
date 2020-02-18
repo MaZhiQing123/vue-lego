@@ -1,6 +1,7 @@
 import Vue from 'vue'
-import router from './router'
-import App from './App.vue'
+import router from './components/root/router'
+import App from './components/root/App.vue'
+console.log(router)
 
 new Vue({
     el: '#root',

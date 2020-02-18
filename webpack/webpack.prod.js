@@ -1,7 +1,10 @@
 
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const ConsoleLogOnBuildWebpackPlugin = require('./hello.js')
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // 引入HtmlWebpackPlugin插件
+const path = require('path');  // 路径处理模块
+
+// const ConsoleLogOnBuildWebpackPlugin = require('./hello.js')
 // const WebpackMd5Hash = require('webpack-md5-hash')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 引入CleanWebpackPlugin插件
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -46,19 +49,22 @@ module.exports = name => {
             webpackConfigList.push(config)
         });        
     } else {
+        let config = merge(common, webpackDefalutConfig)
         config.entry = {
-            index:`./src/components/root/main.js`
+            index:`./src/main.js`
         }
         config.plugins = [
+            ...config.plugins,
             new HtmlWebpackPlugin({
                 template: path.join(__dirname, "../index.html")
             }),
             new CleanWebpackPlugin(),
         ],
         config.output.filename = `static/js/[name].[chunkhash:8].js`
+        webpackConfigList = []
         webpackConfigList.push(config)
+        console.log(config)
     }
- 
-    console.log(webpackConfigList)
+
     return webpackConfigList
 }

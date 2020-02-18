@@ -1,10 +1,7 @@
 <template>
-    <div>
-        <router-view></router-view>
-    </div>
+    <router-view />
 </template>
 <script>
-import relation from '@/relation.json'
 export default {
     name:'App',
     data(){
@@ -13,7 +10,7 @@ export default {
         }
     },
     created(){
-        console.log(relation)
+
     }
 }
 </script>
