@@ -1,19 +1,16 @@
 
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // 引入HtmlWebpackPlugin插件
-const path = require('path');  // 路径处理模块
-
-// const ConsoleLogOnBuildWebpackPlugin = require('./hello.js')
-// const WebpackMd5Hash = require('webpack-md5-hash')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 引入CleanWebpackPlugin插件
+const ConsoleLogOnBuildWebpackPlugin = require('./hello.js')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 let webpackConfigList = []
+process.env.NODE_ENV = 'production'
 const webpackDefalutConfig = {
     mode:'production',
     plugins: [
-        // new WebpackMd5Hash(),
-        // new ConsoleLogOnBuildWebpackPlugin(),
     ],
     optimization: {
         splitChunks: {
@@ -22,11 +19,12 @@ const webpackDefalutConfig = {
                     name: "vendor",
                     test: /[\\/]node_modules[\\/]/,
                     chunks: "all",
-                    priority: 10 // 优先级
+                    priority: 10
                 }
             }
         }
     },
+    
     entry:{},
     output:{}
 }
@@ -42,6 +40,10 @@ module.exports = name => {
             config.entry = {
                 index:`./src/components/child/${element}`
             }
+            config.plugins = [
+                ...config.plugins,
+                new ConsoleLogOnBuildWebpackPlugin()
+            ],
             config.output = {
                 filename:`static/js/${element}/[name].js`,
                 chunkFilename:`static/js/${element}/[name].[chunkhash:8].js`,
