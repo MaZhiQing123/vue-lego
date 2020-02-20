@@ -1,5 +1,6 @@
 import relation from './relation.js'
-const mount = router => {
+import loadjs from 'loadjs'
+const mount = (router,route) => {
     let routerList = [
         {
             name:'main',
@@ -10,22 +11,36 @@ const mount = router => {
         }
     ]
     if(process.env.NODE_ENV == 'production'){
-        router.addRoutes(routerList)
-        relation.forEach(v => {
-            let parent = v.module
+        const loader = path => {
+            let parent = ''
+            relation.forEach(v => {
+                if(v.path == path) {
+                    parent = v.module
+                }
+            })
             loadjs(`/static/js/${parent}/index.js`,'mountModule')
             loadjs.ready('mountModule',{
                 success: function(){
-                    console.log(window[`lego_module_${parent}`])
+                    routerList[0].children = [...routerList[0].children,...window[`lego__module_${parent}`].default]
+                    router.addRoutes(routerList)
                 },
                 error: function() {
                     router.push('/404')
                 }
             })
-        })
+        }
+        if(!router.beforeEachMount){
+            loader(router.history.current.path)
+        }
+        router.beforeEach((to, from, next) => {
+            router.beforeEachMount = true
+            loader(to.path)
+            next()
+        })            
+        
     } else {
         for(let i in relation){
-            let parent = relation[i].module
+            let parent = relation[i]
             routerList[0].children.push(...require(`@/components/child/${parent}`).default)
         }
         router.addRoutes(routerList)        

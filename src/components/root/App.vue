@@ -11,7 +11,7 @@ export default {
         }
     },
     created(){
-        mount(this.$router)
+        mount(this.$router,this.$route)
     }
 }
 </script>

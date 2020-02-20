@@ -21,6 +21,9 @@ module.exports = merge(common, {   // 将webpack.common.js合并到当前文件
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "../index.html")// new一个这个插件的实例，并传入相关的参数
         }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('development')
+        }),
         new webpack.HotModuleReplacementPlugin(),
     ],
 })
