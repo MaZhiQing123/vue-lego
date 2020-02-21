@@ -11,7 +11,16 @@ export default {
         }
     },
     created(){
-        mount(this.$router,this.$route)
+        mount(this.$router)
+        // if(!router.beforeEachMount){
+        //     mount(router.history.current.path)
+        // }
+        // router.beforeEach((to, from, next) => {
+        //     router.beforeEachMount = true
+        //     mount(to.path)
+        //     next()
+        // }) 
+        
     }
 }
 </script>
