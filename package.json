@@ -5,7 +5,8 @@
   "scripts": {
     "test": "test",
     "build": "node webpack/webpack.prod.option.js",
-    "start": "webpack-dev-server --open --config webpack/webpack.dev.js"
+    "start": "webpack-dev-server --open --config webpack/webpack.dev.js",
+    "create": "node webpack/webpack.create.js"
   },
   "author": "mzq",
   "license": "ISC",

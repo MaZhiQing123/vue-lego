@@ -41,7 +41,10 @@ const build = name => {
             }
             process.stdout.write(stats.toString({
                 colors: true,
-                modules: false
+                modules: false,
+                reasons:false,
+                children:false,
+                entrypoints:false
             }))
             resolved()
         }) 
@@ -60,6 +63,5 @@ const build = name => {
         console.log(`ALL Building...`);
         await build(checkMode.value)
     }
-    console.log('\n---------------------------success------------------------')
 })()
 

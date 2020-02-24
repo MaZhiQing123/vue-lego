@@ -1,8 +1,7 @@
 import relation from './relation.js'
 import loadjs from 'loadjs'
 import main from './main.vue'
-import routers from './router/index.js'
-
+const relationData = relation
 let routesMemory = []
 let routerList = [
     {
@@ -13,29 +12,11 @@ let routerList = [
         ]
     }
 ]
-const filterproduction = (path,router,type) => {
-    if(relation[i].path == path){
-        let parent = relation[i].parent
-        loadjs(`/static/js/${parent}/index.js`,'mountModule')
-        loadjs.ready('mountModule',{
-            success: function(){
-                routerList[0].children.push(...window[`lego__module_${parent}`].default)
-                if(type){
-                    router.options.routes = routerList
-                    router.addRoutes(router.options.routes)      
-                } else {
-                    router.addRoutes(routerList) 
-                }
-            },
-            error: function() {
-            }
-        })
-    }
-}
+
 const filterdevelopment = (path,router,type) => {
-    for(let i in relation){
-        if(relation[i].path == path){
-            let parent = relation[i].parent
+    for(let i in relationData){
+        if(relationData[i].path == path){
+            let parent = relationData[i].parent
             routerList[0].children.push(...require(`@/components/child/${parent}`).default)
             if(type){
                 router.options.routes = routerList
@@ -53,7 +34,20 @@ const mount = router => {
             if(process.env.NODE_ENV == 'development'){
                 filterdevelopment(router.history.current.path,router,false)
             } else {
-                filterproduction(router.history.current.path,router,false)
+                for(let i in relationData){
+                    if(relationData[i].path == router.history.current.path){
+                        let parent = relationData[i].parent
+                        loadjs(`/static/js/${parent}/index.js`,'mountModule2')
+                        loadjs.ready('mountModule2',{
+                            success: function(){
+                                routerList[0].children.push(...window[`lego__module_${parent}`].default)
+                                router.addRoutes(routerList)
+                            },
+                            error: function() {
+                            }
+                        })                        
+                    }
+                }
             }
         }
     }
@@ -64,37 +58,26 @@ const mount = router => {
             if(process.env.NODE_ENV == 'development'){
                 filterdevelopment(to.path,router,true)
             } else {
-                filterproduction(to.path,router,true)
+                for(let i in relationData){
+                    if(relationData[i].path == to.path){
+                        let parent = relationData[i].parent
+                        loadjs(`/static/js/${parent}/index.js`,'mountModule')
+                        loadjs.ready('mountModule',{
+                            success: function(){
+                                routerList[0].children.push(...window[`lego__module_${parent}`].default)
+                                router.options.routes = routerList
+                                router.addRoutes(routerList)
+                            },
+                            error: function() {
+                            }
+                        })                        
+                    }
+                }
             }
         }
 
         next()
     }) 
-
-    // if(process.env.NODE_ENV == 'production'){
-    //         let parent = ''
-    //         relation.forEach(v => {
-    //             if(v.path == path) {
-    //                 parent = v.module
-    //             }
-    //         })
-    //         loadjs(`/static/js/${parent}/index.js`,'mountModule')
-    //         loadjs.ready('mountModule',{
-    //             success: function(){
-    //                 routerList[0].children = [...routerList[0].children,...window[`lego__module_${parent}`].default]
-    //                 router.addRoutes(routerList)
-    //             },
-    //             error: function() {
-    //                 router.push('/404')
-    //             }
-    //         })
-    // } else {
-    //     // for(let i in relation){
-    //     //     let parent = relation[i].module
-    //     //     routerList[0].children.push(...require(`@/components/child/${parent}`).default)
-    //     // }
-    //     // router.addRoutes(routerList)        
-    // }
 
 }
 export default mount
