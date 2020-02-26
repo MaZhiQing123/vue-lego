@@ -1,6 +1,6 @@
 <template>
     <div class="anc">
-        112312312
+        1d1dd1d1d1d1d1d
         <!-- <qwepoi></qwepoi> -->
     </div>
 </template>
@@ -13,9 +13,3 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-.anc{
-    transform: rotate(1deg);
-    height: 100px;
-}
-</style>

@@ -6,14 +6,14 @@ export default [
         name:'a1',
         component:() => import(/* webpackChunkName: "a1" */ './view/a1.vue'),
         meta:{
-            name:"募集说明书结果查询"
+            name:"A1页面"
         },
     },{
-        path:'c1',
-        name:'c1',
+        path:'a2',
+        name:'a2',
         component:() => import(/* webpackChunkName: "c1" */ './view/c1.vue'),
         meta:{
-            name:"募集说明书结果查询a "
+            name:"A2页面 "
         },
     }
 ]    

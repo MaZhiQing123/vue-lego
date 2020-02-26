@@ -1,15 +1,12 @@
 {
-  "name": "vue-lego-cli",
+  "name": "vue-Project",
   "version": "0.0.1",
-  "description": "可以构建可插拔式Vue项目的脚手架工具",
+  "description": "",
   "scripts": {
     "test": "test",
     "build": "node webpack/webpack.prod.option.js",
     "start": "webpack-dev-server --open --config webpack/webpack.dev.js",
     "add": "node webpack/webpack.add.js"
-  },
-  "bin":{
-    "created": "node "
   },
   "author": "mzq",
   "license": "ISC",
