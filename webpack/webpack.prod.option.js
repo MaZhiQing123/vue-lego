@@ -43,7 +43,7 @@ const build = name => {
                 colors: true,
                 modules: false,
                 reasons:false,
-                children:false,
+                children:true,
                 entrypoints:false
             }))
             resolved()

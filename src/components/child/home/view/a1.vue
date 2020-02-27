@@ -1,7 +1,6 @@
 <template>
     <div class="anc">
-        112312312asdasdasdsas
-        <!-- <qwepoi></qwepoi> -->
+        test
     </div>
 </template>
 <script>

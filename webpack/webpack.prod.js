@@ -51,8 +51,10 @@ module.exports = name => {
             config.output = {
                 libraryTarget: 'umd',
                 library:`lego__module_${element}`,
+                path:path.resolve(__dirname, '../dist'),
+                publicPath:'/',
                 filename:`static/js/${element}/[name].js`,
-                chunkFilename:`static/js/${element}/[name].[chunkhash:8].js`,
+                chunkFilename:`static/js/${element}/[name].[contenthash:8].js`,
             }
             webpackConfigList.push(config)
         });        
@@ -69,8 +71,10 @@ module.exports = name => {
             new CleanWebpackPlugin()
         ];
         config.output = {
+            path:path.resolve(__dirname, '../dist/'),
+            publicPath:'/',
             filename:'static/js/[name].[hash:8].js',
-            chunkFilename:'static/js/[name].[chunkhash:8].js',
+            chunkFilename:'static/js/[name].[contenthash:8].js',
         }
         webpackConfigList = config;
     }
