@@ -1,18 +1,17 @@
 
+process.env.NODE_ENV = 'production'
+
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 let webpackConfigList = []
 const webpackDefalutConfig = {
     mode:'production',
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        }),
     ],
     optimization: {
         splitChunks: {
@@ -22,7 +21,7 @@ const webpackDefalutConfig = {
                     test: /[\\/]node_modules[\\/]/,
                     chunks: "all",
                     priority: 10
-                }
+                },
             }
         }
     },
@@ -66,7 +65,11 @@ module.exports = name => {
         config.plugins = [
             ...config.plugins,
             new HtmlWebpackPlugin({
-                template: path.join(__dirname, "../index.html")
+                filename: 'index.html',
+                template: 'index.html',
+                inject: true,
+                hash: true,
+                favicon: 'favicon.ico'
             }),
             new CleanWebpackPlugin()
         ];

@@ -51,7 +51,6 @@ const build = name => {
     })
 
 }
-// build(['a','b'])
 (async function(){
     let checkMode = await inquirer.prompt(modeList);
     console.log(`TYPE: ${checkMode.value}`)

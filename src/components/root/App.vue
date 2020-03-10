@@ -2,7 +2,6 @@
     <router-view></router-view>
 </template>
 <script>
-import mount from './mount.js'
 export default {
     name:'App',
     data(){
@@ -11,7 +10,14 @@ export default {
         }
     },
     created(){
-        mount(this.$router)
+        let fn = require('./mount/mount_' + process.env.NODE_ENV)
+        fn.default(this.$router)
+    },
+    methods:{
+
     }
 }
 </script>
+<style>
+
+</style>
